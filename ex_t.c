@@ -52,3 +52,69 @@ int ex_tc(char **args, list_t *envList, int inputOrder, char **commandArgs)
 	exit(exitValue);
 }
 
+/**
+ * conc_s - Concatenate two strings ignoring the first character
+ * @destination: String to be appended to
+ * @source: String to append
+ * Return: Concatenated string
+ */
+char *conc_s(char *destination, char *source)
+{
+	int destLen = 0;
+	int srcLen = 0;
+	int totalLen = 0;
+	int j = 0;
+
+	while (destination[destLen] != '\0')
+	{
+		destLen++;
+		totalLen++;
+	}
+	while (source[srcLen] != '\0')
+	{
+		srcLen++;
+		totalLen++;
+	}
+		destination = _realloc(destination, destLen, sizeof(char) * totalLen + 1);
+
+		j = 1;
+		while (source[j] != '\0')
+		{
+			destination[destLen] = source[j];
+			destLen++;
+			j++;
+		}
+		destination[destLen] = '\0';
+
+		return (destination);
+}
+
+/**
+ * con_set - by concatenating strings before setting.
+ * @envList: Environmental variable linked list.
+ * @name: Environmental variable name
+ * @directory: Directory path
+ *  Return: 0 on success
+ */
+int con_set(list_t **envList, char *name, char *directory)
+{
+	int index = 0, j = 0;
+	char *concatenatedString;
+	myli_t *holder;
+
+	concatenatedString = dup_s(name);
+	concatenatedString = st_cat(concatenatedString, "=");
+	concatenatedString = st_cat(concatenatedString, directory);
+	index = find_env(*envList, name);
+	holder = *envList;
+	while (j < index)
+	{
+		holder = holder->next;
+		j++;
+	}
+	free(holder->var);
+	holder->var = st_dup(concatenatedString);
+	free(concatenatedString);
+	return (0);
+}
+
