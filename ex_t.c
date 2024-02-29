@@ -30,7 +30,7 @@ int custi(char *str)
  * @commandArgs: The command arguments to free.
  * Return: 0 if successful, 2 if failure.
  */
-int ex_tc(char **args, list_t *envList, int inputOrder, char **commandArgs)
+int ex_tc(char **args, myli_t *envList, int inputOrder, char **commandArgs)
 {
 	int exitValue = 0;
 
@@ -96,7 +96,7 @@ char *conc_s(char *destination, char *source)
  * @directory: Directory path
  *  Return: 0 on success
  */
-int con_set(list_t **envList, char *name, char *directory)
+int con_set(myli_t **envList, char *name, char *directory)
 {
 	int index = 0, j = 0;
 	char *concatenatedString;
@@ -116,5 +116,37 @@ int con_set(list_t **envList, char *name, char *directory)
 	holder->var = st_dup(concatenatedString);
 	free(concatenatedString);
 	return (0);
+}
+
+/**
+ * exe_cd - Executes the 'cd' command.
+ * @envList: Environmental linked list to update
+ * @curDir: Current working directory.
+ * @newDir: Directory path to change to.
+ * @erMsg: 1st argument to write out error.
+ * @liNum: Line number to write out error.
+ * Return: 0 if success, 2 if fail
+ */
+int exe_cd(myli_t *envList, char *curDir, char *newDir, char *erMsg, int liNum)
+{
+	int status = 0;
+
+	if (access(newDir, F_OK) == 0)
+	{
+		con_set(&envList, "OLDPWD", curDir);
+		free(curDir);
+		chdir(newDir);
+		curDir = NULL;
+		curDir = getcwd(curDir, 0);
+		con_set(&envList, "PWD", curDir);
+		free(curDir);
+	}
+	else
+	{
+		cantchange_dir(erMsg, liNum, envList);
+		free(curDir);
+		status = 2;
+	}
+	return (status);
 }
 
