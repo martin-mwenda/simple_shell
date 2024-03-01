@@ -1,4 +1,4 @@
-
+#include "shell.h"
 
 /**
  * leng_str - the length of a token's string for dynamic memory allocation.

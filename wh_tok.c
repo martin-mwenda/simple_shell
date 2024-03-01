@@ -46,7 +46,7 @@ char **c_str_tok(char *str, char *delm)
  * @env: environmental variable
  * Return: a copy of fleshed out command
  */
-char *w_hch(char *str, list_t *env)
+char *w_hch(char *str, myli_t *env)
 {
 	char *pth, *cat = NULL, **toks;
 	int i = 0;
