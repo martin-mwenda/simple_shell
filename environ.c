@@ -13,7 +13,7 @@ myli_t *environ_ll(char **env).
 	head = NULL;
 	while (env[i] != NULL)
 	{
-		addEndNode(&head, env[i]);
+		add_endde(&head, env[i]);
 		i++;
 	}
 	return (head);
@@ -28,7 +28,7 @@ myli_t *environ_ll(char **env).
 int pr_env(char **command, myli_t *envList)
 {
 	fr_dbptr(command);
-	printList(envList);
+	print_list(envList);
 	return (0);
 }
 

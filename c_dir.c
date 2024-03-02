@@ -9,7 +9,7 @@ void c_dir(myli_t *envList, char *currentDir)
 {
 	char *home = NULL;
 
-	home = get_env("HOME", envList);
+	home = br_env("HOME", envList);
 	con_set(&envList, "OLDPWD", currentDir);
 	free(currentDir);
 	if (access(home, F_OK) == 0)
@@ -56,7 +56,7 @@ int c_d(char **str, myli_t *envList, int num)
 			}
 			else
 			{
-				dir = _strdup(str[1]);
+				dir = dup_s(str[1]);
 			}
 		}
 		exitStat = exe_cd(envList, current, dir, str[1], num);
