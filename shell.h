@@ -61,7 +61,7 @@ int mcount_del(char *str, char delim);
 char *rem_del(char *str, char delim);
 int count_del(char *str, char delim);
 int exe_cd(myli_t *envList, char *curDir, char *newDir, char *erMsg, int liNum);
-int con_set(myli_t **env, char *name, char *dir)
+int con_set(myli_t **env, char *name, char *dir);
 char *conc_s(char *destination, char *source);
 int custi(char *str);
 void c_dir(myli_t *envList, char *currentDir);
