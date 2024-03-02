@@ -1,4 +1,4 @@
-include "shell.h"
+#include "shell.h"
 
 /**
  * custi - Custom implementation that converts a string to an integer
@@ -30,27 +30,25 @@ int custi(char *str)
  * @commandArgs: The command arguments to free.
  * Return: 0 if successful, 2 if failure.
  */
-int ex_tc(char **args, myli_t *envList, int inputOrder, char **commandArgs)
+int ex_ct(char **str, list_t *env, int num, char **command)
 {
-	int exitValue = 0;
+	int e_value = 0;
 
-
-	if (args[1] != NULL)
-		exitValue = custi(args[1]);
-	if (exitValue == -1)
+	if (str[1] != NULL)
+		e_value = c_atoi(str[1]);
+	if (e_value == -1)
 	{
-		illegal_numb(args[1], inputOrder, envList);
-		fr_dbPtr(args);
+		illegal_numb(str[1], num, env);
+		fr_dbptr(str);
 		return (2);
 	}
-	fr_dbPtr(args);
-	fr_linkl(envList);
-
-	if (commandArgs != NULL)
-		fr_dbPtr(commandArgs);
-
-	exit(exitValue);
+	fr_dbptr(str);
+	fr_linkl(env);
+	if (command != NULL)
+		fr_dbptr(command);
+	exit(e_value);
 }
+
 
 /**
  * conc_s - Concatenate two strings ignoring the first character

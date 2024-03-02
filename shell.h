@@ -22,11 +22,12 @@ typedef struct list
 {
 	char *var;
 	struct list *next;
-} myli_t
+} myli_t;
+
 
 int prompt(char **en);
 void *_realloc(void *ptr, unsigned int oldSize, unsigned int newSize);
-size_t get_line(char **buffer);
+size_t get_line(char **str);
 int leng_str(char *str, int pos, char delm);
 char *ignore_space(char *input);
 char **token_zer(char *str, char *delim);
@@ -39,7 +40,7 @@ int c_d(char **str, myli_t *envList, int num);
 int built_in(char **token, myli_t *env, int num, char **command);
 void not_inter(myli_t *env);
 char *w_hch(char *str, myli_t *env);
-int ex_tc(char **args, myli_t *envList, int inputOrder, char **commandArgs);
+int ex_ct(char **str, list_t *env, int num, char **command);
 int _execve(char **command, myli_t *envList, int num);
 void fr_dbptr(char **stringArray);
 void fr_linkl(myli_t *list);

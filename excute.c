@@ -66,40 +66,37 @@ int _execve(char **command, myli_t *envList, int num)
  * @buffer: Buffer to store the user's command.
  * Return: Number of characters read.
  */
-size_t get_line(char **buffer)
+size_t get_line(char **str)
 {
-	ssize_t bytesRead = 0, totalSize = 0, terLp = 0, newlineFound = 0;
-	char chunk[1024];
+	ssize_t i = 0, size = 0, t = 0, t2 = 0, n = 0;
+	char buff[1024];
 
-	while (terLp == 0 && (bytesRead = read(STDIN_FILENO, chunk, 1024 - 1)))
+	while (t2 == 0 && (i = read(STDIN_FILENO, buff, 1024 - 1)))
 	{
-		if (bytesRead == -1)
+		if (i == -1)
 			return (-1);
-		chunk[bytesRead] = '\0';
-
-		newlineFound = 0;
-		size_t n = 0;
-
-		while (chunk[n] != '\0')
+		buff[i] = '\0';
+		n = 0;
+		while (buff[n] != '\0')
 		{
-			if (chunk[n] == '\n')
-				newlineFound = 1;
+			if (buff[n] == '\n')
+				t2 = 1;
 			n++;
 		}
-		if (totalSize == 0)
+		if (t == 0)
 		{
-			bytesRead++;
-			*buffer = malloc(sizeof(char) * bytesRead);
-			*buffer = copy_str(*buffer, chunk);
-			totalSize = bytesRead;
+			i++;
+			*str = malloc(sizeof(char) * i);
+			*str = _strcpy(*str, buff);
+			size = i;
+			t = 1;
 		}
 		else
 		{
-			totalSize += bytesRead;
-			*buffer = st_cat(*buffer, chunk);
+			size += i;
+			*str = _strcat(*str, buff);
 		}
-		terLp = newlineFound;
 	}
-	return (totalSize);
+	return (size);
 }
 
