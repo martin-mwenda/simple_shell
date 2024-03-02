@@ -47,7 +47,7 @@ myli_t *add_endde(myli_t **head, char *str)
 
 	if (head == NULL || str == NULL)
 		return (NULL);
-	new = malloc(sizeof(list_t));
+	new = malloc(sizeof(myli_t));
 	if (new == NULL)
 		return (NULL);
 	new->var = dup_s(str);

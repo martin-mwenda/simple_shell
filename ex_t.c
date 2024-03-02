@@ -23,7 +23,7 @@ int custi(char *str)
 }
 
 /**
- * ex_tc - Frees resources and exits the main program with a specified value.
+ * ex_ct - Frees resources and exits the main program with a specified value.
  * @str: User's command for the shell exit
  * @env: Environmental variables to free in case of an error.
  * @num: The user's command line input to print error message.
@@ -35,7 +35,7 @@ int ex_ct(char **str, myli_t *env, int num, char **command)
 	int e_value = 0;
 
 	if (str[1] != NULL)
-		e_value = c_atoi(str[1]);
+		e_value = custi(str[1]);
 	if (e_value == -1)
 	{
 		illegal_numb(str[1], num, env);
@@ -45,7 +45,9 @@ int ex_ct(char **str, myli_t *env, int num, char **command)
 	fr_dbptr(str);
 	fr_linkl(env);
 	if (command != NULL)
+	{
 		fr_dbptr(command);
+	}
 	exit(e_value);
 }
 
@@ -89,30 +91,30 @@ char *conc_s(char *destination, char *source)
 
 /**
  * con_set - by concatenating strings before setting.
- * @envList: Environmental variable linked list.
+ * @env: Environmental variable linked list.
  * @name: Environmental variable name
- * @directory: Directory path
+ * @dir: Directory path
  *  Return: 0 on success
  */
-int con_set(myli_t **envList, char *name, char *directory)
+int con_set(myli_t **env, char *name, char *dir)
 {
 	int index = 0, j = 0;
-	char *concatenatedString;
+	char *cat;
 	myli_t *holder;
 
-	concatenatedString = dup_s(name);
-	concatenatedString = st_cat(concatenatedString, "=");
-	concatenatedString = st_cat(concatenatedString, directory);
-	index = find_env(*envList, name);
-	holder = *envList;
+	cat = dup_s(name);
+	cat = st_cat(cat, "=");
+	cat = st_cat(cat, dir);
+	index = find_env(*env, name);
+	holder = *env;
 	while (j < index)
 	{
 		holder = holder->next;
 		j++;
 	}
 	free(holder->var);
-	holder->var = st_dup(concatenatedString);
-	free(concatenatedString);
+	holder->var = dup_s(cat);
+	free(cat);
 	return (0);
 }
 

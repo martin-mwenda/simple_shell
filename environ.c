@@ -5,7 +5,7 @@
  * @env: Environmental variables.
  * Return: Linked list.
  */
-myli_t *environ_ll(char **env).
+myli_t *environ_ll(char **env)
 {
 	myli_t *head;
 	int i = 0;
@@ -35,12 +35,12 @@ int pr_env(char **command, myli_t *envList)
 /**
  * str_dup - Custom string duplication, excluding beginning bytes
  * @str: String to duplicate
- * @excludeBytes: Number of bytes to exclude
+ * @cs: Number of bytes to exclude
  * Return: Duplicated string
  */
-char *str_dup(char *str, int excludeBytes)
+char *str_dup(char *str, int cs)
 {
-	char *duplicateStr;
+	char *duplicate_str;
 	int i, len = 0;
 
 	if (str == NULL)
@@ -48,17 +48,18 @@ char *str_dup(char *str, int excludeBytes)
 	while (*(str + len))
 		len++;
 	len++;
-	duplicateStr = malloc(sizeof(char) * (len - excludeBytes));
-	if (duplicateStr == NULL)
+	duplicate_str = malloc(sizeof(char) * (len - cs));
+	if (duplicate_str == NULL)
 		return (NULL);
 	i = 0;
-	while (i < (len - excludeBytes))
+	while (i < (len - cs))
 	{
-		*(duplicateStr + i) = *(str + excludeBytes + i);
+		*(duplicate_str + i) = *(str + cs + i);
 		i++;
 	}
-	return (duplicateStr);
+	return (duplicate_str);
 }
+
 
 /**
  * br_env - Finds and returns a copy of the requested environmental variable.

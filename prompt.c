@@ -101,7 +101,7 @@ int built_in(char **token, myli_t *env, int num, char **command)
 
 	if (comp_str(token[0], "exit") == 0)
 	{
-		i = ex_tc(token, env, num, command);
+		i = ex_ct(token, env, num, command);
 	}
 	else if (comp_str(token[0], "env") == 0)
 	{

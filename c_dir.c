@@ -63,7 +63,7 @@ int c_d(char **str, myli_t *envList, int num)
 		free(dir);
 	}
 	else
-		cd_dir(envList, current);
-	fr_db_ptr(str);
+		c_dir(envList, current);
+	fr_dbptr(str);
 	return (exitStat);
 }

@@ -9,7 +9,7 @@ void cm_frexit(char **cmd, myli_t *envList)
 {
 	fr_dbptr(cmd);
 	fr_linkl(envList);
-	ex_tc(0);
+	ex_ct(NULL, NULL, 0, NULL);
 }
 
 /**
@@ -63,7 +63,7 @@ int _execve(char **command, myli_t *envList, int num)
 
 /**
  * get_line - Stores into a malloced buffer the user's command into the shell.
- * @buffer: Buffer to store the user's command.
+ * @str: Buffer to store the user's command.
  * Return: Number of characters read.
  */
 size_t get_line(char **str)
@@ -87,14 +87,14 @@ size_t get_line(char **str)
 		{
 			i++;
 			*str = malloc(sizeof(char) * i);
-			*str = _strcpy(*str, buff);
+			*str = copy_str(*str, buff);
 			size = i;
 			t = 1;
 		}
 		else
 		{
 			size += i;
-			*str = _strcat(*str, buff);
+			*str = st_cat(*str, buff);
 		}
 	}
 	return (size);
