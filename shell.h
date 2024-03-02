@@ -40,7 +40,7 @@ int c_d(char **str, myli_t *envList, int num);
 int built_in(char **token, myli_t *env, int num, char **command);
 void not_inter(myli_t *env);
 char *w_hch(char *str, myli_t *env);
-int ex_ct(char **str, list_t *env, int num, char **command);
+int ex_ct(char **str, myli_t *env, int num, char **command);
 int _execve(char **command, myli_t *envList, int num);
 void fr_dbptr(char **stringArray);
 void fr_linkl(myli_t *list);

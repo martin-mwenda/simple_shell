@@ -61,47 +61,47 @@ char *rem_del(char *str, char delim)
 /**
  * token_zer - tokenizes a string and returns an array of tokens
  * @str: user's command typed into shell
- * @delim: delimeter
+ * @delm: delimeter
  * Return: an array of tokens
  */
-char **token_zer(char *str, char *delim)
+char **token_zer(char *str, char *delm)
 {
-	int bufferSize = 0, p = 0, st = 0, i = 0, len = 0;
-	int enex = 0, tokenCount = 0;
-	char **tokens = NULL, del;
+	int buffsize = 0, p = 0, si = 0, i = 0, len = 0, se = 0, t = 0;
+	char **toks = NULL, d_ch;
 
-	del = delim[0];
-	str = rem_del(str, del);
-	buffersize = count_del(str, del);
-	tokens = malloc(sizeof(char *) * (bufferSize + 2));
-	if (tokens == NULL)
+	d_ch = delm[0];
+	str = rem_del(str, d_ch);
+	buffsize = count_del(str, d_ch);
+	toks = malloc(sizeof(char *) * (buffsize + 2));
+	if (toks == NULL)
 		return (NULL);
-	while (str[enex] != '\0')
-		enex++;
-	while (st < enex)
+	while (str[se] != '\0')
+		se++;
+	while (si < se)
 	{
-		if (str[st] != del)
+		if (str[si] != d_ch)
 		{
-			len = leng_str(str, st, del);
-			tokens[p] = malloc(sizeof(char) * (len + 1));
-			if (tokens[p] == NULL)
+			len = leng_str(str, si, d_ch);
+			toks[p] = malloc(sizeof(char) * (len + 1));
+			if (toks[p] == NULL)
 				return (NULL);
 			i = 0;
-			while ((str[st] != del) && (str[st] != '\0'))
+			while ((str[si] != d_ch) && (str[si] != '\0'))
 			{
-				tokens[p][i] = str[st];
+				toks[p][i] = str[si];
 				i++;
-				st++;
+				si++;
 			}
-			tokens[p][i] = '\0';
-			tokenCount++;
+			toks[p][i] = '\0';
+			t++;
 		}
-		if (st < enex && (str[st + 1] != del && str[st + 1] != '\0'))
-			st++;
+		if (si < se && (str[si + 1] != d_ch && str[si + 1] != '\0'))
+			p++;
+		si++;
 	}
 	p++;
-	tokens[p] = NULL;
-	return (tokens);
+	toks[p] = NULL;
+	return (toks);
 }
 
 /**

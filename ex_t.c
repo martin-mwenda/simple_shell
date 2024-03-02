@@ -24,13 +24,13 @@ int custi(char *str)
 
 /**
  * ex_tc - Frees resources and exits the main program with a specified value.
- * @args: User's command for the shell exit
- * @envList: Environmental variables to free in case of an error.
- * @inputOrder: The user's command line input to print error message.
- * @commandArgs: The command arguments to free.
+ * @str: User's command for the shell exit
+ * @env: Environmental variables to free in case of an error.
+ * @num: The user's command line input to print error message.
+ * @command: The command arguments to free.
  * Return: 0 if successful, 2 if failure.
  */
-int ex_ct(char **str, list_t *env, int num, char **command)
+int ex_ct(char **str, myli_t *env, int num, char **command)
 {
 	int e_value = 0;
 
