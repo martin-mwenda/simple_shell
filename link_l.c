@@ -123,4 +123,3 @@ void fr_linkl(myli_t *list)
 	}
 }
 
-

@@ -37,7 +37,7 @@ int _execve(char **command, myli_t *envList, int num)
 	if (access(executable, X_OK) != 0)
 	{
 		cant_find(command[0], num, envList);
-		free_double_ptr(command);
+		fr_dbptr(command);
 	}
 	else
 	{
@@ -90,13 +90,13 @@ size_t get_line(char **buffer)
 		{
 			bytesRead++;
 			*buffer = malloc(sizeof(char) * bytesRead);
-			*buffer = _strcpy(*buffer, chunk);
+			*buffer = copy_str(*buffer, chunk);
 			totalSize = bytesRead;
 		}
 		else
 		{
 			totalSize += bytesRead;
-			*buffer = _strcat(*buffer, chunk);
+			*buffer = st_cat(*buffer, chunk);
 		}
 		terLp = newlineFound;
 	}
