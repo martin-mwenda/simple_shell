@@ -60,7 +60,8 @@ int prompt(char **en)
 		else
 			not_inter(env);
 		signal(SIGINT, ctrl_c);
-		command = NULL; i = 0;
+		command = NULL;
+		i = 0;
 		i = get_line(&command);
 		ctrl_D(i, command, env);
 		n_command = command;
@@ -71,9 +72,11 @@ int prompt(char **en)
 		command[n] = '\0';
 		if (command[0] == '\0')
 		{
-			free(n_command); continue;
+			free(n_command);
+			continue;
 		}
-		token = NULL; token = token_zer(command, " ");
+		token = NULL;
+		token = token_zer(command, " ");
 		if (n_command != NULL)
 			free(n_command);
 		exit_stat = built_in(token, env, command_line_no, NULL);
@@ -83,4 +86,43 @@ int prompt(char **en)
 	} while (1);
 	return (exit_stat);
 }
+
+/**
+ * built_in - handles builtins
+ * @token: user's typed command
+ * @env: environmental variable
+ * @num: take in nth user command typed to write error message
+ * @command: bring in command to free
+ * Return: 1 if acted on builtin, 0 if not
+ */
+int built_in(char **token, myli_t *env, int num, char **command)
+{
+	int i = 0;
+
+	if (comp_str(token[0], "exit") == 0)
+	{
+		i = ex_tc(token, env, num, command);
+	}
+	else if (comp_str(token[0], "env") == 0)
+	{
+		pr_env(token, env);
+		i = 1;
+	}
+	else if (comp_str(token[0], "cd") == 0)
+	{
+		i = c_d(token, env, num);
+	}
+	else if (comp_str(token[0], "setenv") == 0)
+	{
+		put_env(&env, token);
+		i = 1;
+	}
+	else if (comp_str(token[0], "unsetenv") == 0)
+	{
+		unput_env(&env, token);
+		i = 1;
+	}
+	return (i);
+}
+
 

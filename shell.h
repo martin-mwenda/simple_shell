@@ -46,15 +46,15 @@ void fr_linkl(myli_t *list);
 int pr_env(char **str, myli_t *env);
 char *br_env(char *str, myli_t *env);
 myli_t *environ_ll(char **env);
-myli_t *add_endde(list_t **head, char *str);
-size_t print_list(list_t *h);
-int delete_nodeint_at_index(list_t **head, int index);
-int _unsetenv(list_t **env, char **str);
-int _setenv(list_t **env, char **str);
-int find_env(list_t *env, char *str);
-void not_found(char *str, int num, list_t *env);
-void cant_cd_to(char *str, int c_n, list_t *env);
-void illegal_number(char *str, int c_n, list_t *env);
-char *int_to_string(int num);
+myli_t *add_endde(myli_t **head, char *str);
+size_t print_list(myli_t *h);
+int del_node_index(myli_t **head, int index);
+int _unsetenv(myli_t **env, char **str);
+int _setenv(myli_t **env, char **str);
+int find_env(myli_t *env, char *str);
+void cant_find(char *str, int num, myli_t *env);
+void cantchange_dir(char *str, int c_n, myli_t *env);
+void illegal_numb(char *str, int c_n, myli_t *env);
+char *con_atos(int num);
 
 #endif
